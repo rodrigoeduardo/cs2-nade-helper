@@ -39,6 +39,11 @@ CAPTURE_MONITOR_INDEX: int = 1
 # Placeholder HUD region covering the weapon name text (bottom-right corner).
 HUD_REGION = ScreenRegion(top=1055, left=1650, width=270, height=25)
 
+# Radar region (top-left corner).
+# NOTE: Adjust width/height to match your in-game radar size. 
+# Usually it's a square circle masked, so capturing a square around it works.
+RADAR_REGION = ScreenRegion(top=0, left=0, width=300, height=300)
+
 # Preprocessing controls for HUDCapture.
 PREPROCESS_SCALE: float = 5
 PREPROCESS_USE_CLAHE: bool = True
@@ -46,9 +51,10 @@ PREPROCESS_ADAPTIVE_BLOCK_SIZE: int = 25  # Must be odd.
 PREPROCESS_ADAPTIVE_C: int = 9
 
 # When True, save the processed grayscale frame to disk each capture loop.
-DEBUG_SAVE_PROCESSED: bool = False
+DEBUG_SAVE_PROCESSED: bool = True
 DEBUG_SAVE_PATH: str = "debug_thresh.png"
 DEBUG_SAVE_GRAY_PATH: str = "debug_gray.png"
+DEBUG_SAVE_RADAR_PATH: str = "debug_radar.png"
 
 # Polling interval (seconds) between capture attempts.
 CAPTURE_INTERVAL_SECONDS: float = 0.35
