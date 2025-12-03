@@ -119,7 +119,7 @@ class NadeDetector:
         avg_conf = sum(confidences) / len(confidences) / 100 if confidences else 0.0
 
         normalized_text = self._normalize(" ".join(tokens))
-        _debug_print_ocr(tokens, avg_conf, normalized_text)
+        # _debug_print_ocr(tokens, avg_conf, normalized_text)
         label = self._search_keyword(normalized_text)
         if not label or avg_conf < self.min_confidence:
             return None
