@@ -86,9 +86,9 @@ class HUDCapture:
         frame = np.array(shot)
         gray, processed = self._preprocess(frame)
 
-        if DEBUG_SAVE_PROCESSED:
-            cv2.imwrite(DEBUG_SAVE_GRAY_PATH, gray)
-            cv2.imwrite(DEBUG_SAVE_PATH, processed)
-            print(f"[capture] Saved debug frames to {DEBUG_SAVE_GRAY_PATH}, {DEBUG_SAVE_PATH}")
+        # if DEBUG_SAVE_PROCESSED:
+        #     cv2.imwrite(DEBUG_SAVE_GRAY_PATH, gray)
+        #     cv2.imwrite(DEBUG_SAVE_PATH, processed)
+        #     print(f"[capture] Saved debug frames to {DEBUG_SAVE_GRAY_PATH}, {DEBUG_SAVE_PATH}")
 
         return CaptureResult(raw_bgra=frame, processed_gray=gray)
