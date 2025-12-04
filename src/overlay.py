@@ -18,6 +18,7 @@ from PIL import Image, ImageTk
 import tkinter as tk
 from plyer import notification
 
+from .config import DEBUG_SAVE_RADAR_PATH, DEBUG_SAVE_RADAR_NORMALIZED_PATH, DEBUG_SAVE_NORTH_DETECTION_PATH, DEBUG_SAVE_PLAYER_POS_PATH
 
 @dataclass
 class OverlayState:
@@ -42,10 +43,10 @@ class NotificationOverlay:
         
         # Image paths
         self.debug_images = {
-            "radar": "debug_radar.png",
-            "radar_normalized": "debug_radar_normalized.png",
-            "player_pos": "debug_player_pos.png",
-            "north_detection": "debug_north_detection.png"
+            "radar": DEBUG_SAVE_RADAR_PATH,
+            "radar_normalized": DEBUG_SAVE_RADAR_NORMALIZED_PATH,
+            "player_pos": DEBUG_SAVE_PLAYER_POS_PATH,
+            "north_detection": DEBUG_SAVE_NORTH_DETECTION_PATH
         }
         
         # Store PhotoImage references to prevent garbage collection

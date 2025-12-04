@@ -51,10 +51,12 @@ PREPROCESS_ADAPTIVE_BLOCK_SIZE: int = 25  # Must be odd.
 PREPROCESS_ADAPTIVE_C: int = 9
 
 # When True, save the processed grayscale frame to disk each capture loop.
-DEBUG_SAVE_PROCESSED: bool = True
-DEBUG_SAVE_PATH: str = "debug_thresh.png"
-DEBUG_SAVE_GRAY_PATH: str = "debug_gray.png"
-DEBUG_SAVE_RADAR_PATH: str = "debug_radar.png"
+DEBUG_MODE: bool = True
+DEBUG_SAVE_RADAR_PATH: str = "debug/debug_radar.png"
+DEBUG_SAVE_RADAR_NORMALIZED_PATH: str = "debug/debug_radar_normalized.png"
+DEBUG_SAVE_NORTH_DETECTION_PATH: str = "debug/debug_north_detection.png"
+DEBUG_SAVE_RADAR_SCALED_PATH: str = "debug/debug_radar_scaled.png"
+DEBUG_SAVE_PLAYER_POS_PATH: str = "debug/debug_player_pos.png"
 
 # Polling interval (seconds) between capture attempts.
 CAPTURE_INTERVAL_SECONDS: float = 0.35

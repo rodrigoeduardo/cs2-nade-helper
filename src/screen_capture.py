@@ -14,11 +14,9 @@ import cv2
 import numpy as np
 from mss import mss
 
-from config import (
+from .config import (
     CAPTURE_MONITOR_INDEX,
-    DEBUG_SAVE_GRAY_PATH,
-    DEBUG_SAVE_PATH,
-    DEBUG_SAVE_PROCESSED,
+    DEBUG_MODE,
     HUD_REGION,
     PREPROCESS_ADAPTIVE_BLOCK_SIZE,
     PREPROCESS_ADAPTIVE_C,
@@ -84,11 +82,6 @@ class HUDCapture:
             return None
 
         frame = np.array(shot)
-        gray, processed = self._preprocess(frame)
-
-        # if DEBUG_SAVE_PROCESSED:
-        #     cv2.imwrite(DEBUG_SAVE_GRAY_PATH, gray)
-        #     cv2.imwrite(DEBUG_SAVE_PATH, processed)
-        #     print(f"[capture] Saved debug frames to {DEBUG_SAVE_GRAY_PATH}, {DEBUG_SAVE_PATH}")
+        gray, _ = self._preprocess(frame)
 
         return CaptureResult(raw_bgra=frame, processed_gray=gray)

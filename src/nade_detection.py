@@ -15,7 +15,7 @@ from subprocess import list2cmdline
 import pytesseract
 from pytesseract import Output
 
-from config import MIN_CONFIDENCE, NADE_KEYWORDS, TESSERACT_CMD
+from .config import MIN_CONFIDENCE, NADE_KEYWORDS, TESSERACT_CMD, DEBUG_MODE
 
 # Configure pytesseract if a custom binary path is required.
 if TESSERACT_CMD:
@@ -119,7 +119,8 @@ class NadeDetector:
         avg_conf = sum(confidences) / len(confidences) / 100 if confidences else 0.0
 
         normalized_text = self._normalize(" ".join(tokens))
-        # _debug_print_ocr(tokens, avg_conf, normalized_text)
+        if DEBUG_MODE:
+            _debug_print_ocr(tokens, avg_conf, normalized_text)
         label = self._search_keyword(normalized_text)
         if not label or avg_conf < self.min_confidence:
             return None

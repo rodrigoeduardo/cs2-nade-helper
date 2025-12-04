@@ -17,13 +17,12 @@ import threading
 import time
 from typing import Optional
 
-from capture import HUDCapture
-from config import CAPTURE_INTERVAL_SECONDS
-from detection import NadeDetector, NadeDetection
-from overlay import NotificationOverlay
-from browser import BrowserController
-from radar import RadarMatcher
-
+from .screen_capture import HUDCapture
+from .config import CAPTURE_INTERVAL_SECONDS
+from .nade_detection import NadeDetector, NadeDetection
+from .overlay import NotificationOverlay
+from .browser import BrowserController
+from .radar_location_detection import RadarMatcher
 
 class NadeHelperApp:
     def __init__(self, interval: float = CAPTURE_INTERVAL_SECONDS, browser_enabled: bool = False) -> None:
@@ -42,7 +41,7 @@ class NadeHelperApp:
             
         self.last_navigated_nade: Optional[str] = None
         self.last_pos_update: float = 0
-        self.pos_update_interval: float = 2.0  # Update map position every 2 seconds
+        self.pos_update_interval: float = 2.0
 
     def stop(self) -> None:
         """Stop the application and clean up resources."""
@@ -60,8 +59,7 @@ class NadeHelperApp:
         current = self.current_detection
         if current:
             msg = current.label.title()
-            # detail = f"OCR confidence: {current.confidence:.0%}\nRaw: {current.raw_text}"
-            detail = ""
+            detail = f"OCR confidence: {current.confidence:.0%}\nRaw: {current.raw_text}"
             
             # Browser navigation logic
             if self.browser:
@@ -82,7 +80,7 @@ class NadeHelperApp:
 
         else:
             msg = "No grenade detected"
-            detail = "Keep the grenade wheel open for clearer text."
+            detail = "Move the screen a bit for clearer text."
         
         self.overlay.show(msg, detail)
         print(f"Current nade: {msg}", detail)
@@ -100,7 +98,6 @@ class NadeHelperApp:
     def run(self) -> None:
         while not self._stop_event.is_set():
             self.loop_once()
-            # Use wait() instead of sleep() so it can be interrupted immediately
             self._stop_event.wait(timeout=self.interval)
 
 
@@ -124,7 +121,7 @@ def main(argv: list[str]) -> int:
     args = parse_args(argv)
     app = NadeHelperApp(interval=args.interval, browser_enabled=args.browser)
 
-    def handle_signal(signum, frame):  # pragma: no cover - signal handling
+    def handle_signal(signum: int) -> None:  # pragma: no cover - signal handling
         print(f"\nReceived signal {signum}, stopping...")
         app.stop()
         # Force exit if cleanup takes too long
